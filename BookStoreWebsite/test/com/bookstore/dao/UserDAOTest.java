@@ -85,7 +85,7 @@ public class UserDAOTest {
 	
 	@Test
 	public void testDeleteUsers() {
-		Integer userId = 12;
+		Integer userId = 20;
 		userDAO.delete(userId);
 		Users user = userDAO.get(userId);
 		assertNull(user);
@@ -114,6 +114,14 @@ public class UserDAOTest {
 		assertEquals(5, totalUsers);
 	}
 	
+	
+	@Test
+	public void testFindByEmail() {
+		String email = "sophia@yahoo.com";
+		Users user = userDAO.findbyEmail(email);
+		
+		assertNotNull(user);
+	}
 	@AfterClass
 	public static void tearDownClass() {
 		entityManager.close();
