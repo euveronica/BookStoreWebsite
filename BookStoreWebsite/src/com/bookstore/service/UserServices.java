@@ -47,7 +47,7 @@ public class UserServices {
 		}
 		
 		String listPage = "user_list.jsp";
-		RequestDispatcher requestDispatcher =  request.getRequestDispatcher(listPage );	
+		RequestDispatcher requestDispatcher =  request.getRequestDispatcher(listPage);	
 				
 		requestDispatcher.forward(request, response);
 		
@@ -58,7 +58,7 @@ public class UserServices {
 		String fullName = request.getParameter("fullname");
 		String password = request.getParameter("password");
 			
-		Users existUser = userDAO.findbyEmail(email);
+		Users existUser = userDAO.findByEmail(email);
 		
 		if (existUser != null) {
 			String message = "Could not create user. A user with email " + email+ " already exists";
@@ -71,6 +71,47 @@ public class UserServices {
 		userDAO.create(newUser);
 		listUser("New User was created successfully");
 
+		}
+		
+	}
+
+	public void editUser() throws ServletException, IOException {
+
+		int userId = Integer.parseInt(request.getParameter("id"));
+		Users user = userDAO.get(userId);
+		
+		String editPage = "user_form.jsp";
+		request.setAttribute("user", user);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
+		requestDispatcher.forward(request, response);
+		
+	}
+
+	public void updateUser() throws ServletException, IOException {
+		
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullname");
+		String password = request.getParameter("password");
+		
+		Users userById =  userDAO.get(userId);
+		
+		Users userByEmail = userDAO.findByEmail(email);
+		
+		if (userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
+			String message = "Could not update user. " + email + " already exists." ;
+			
+			request.setAttribute("message", message);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+			requestDispatcher.forward(request, response);
+		}
+		else {
+		Users user = new Users(userId, email, fullName, password);
+		
+		userDAO.update(user);
+		
+		String message = "User has been updated successfully";
+		listUser(message);
 		}
 		
 	}
