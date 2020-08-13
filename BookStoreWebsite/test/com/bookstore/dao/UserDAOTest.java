@@ -53,7 +53,7 @@ public class UserDAOTest extends BaseDAOTest {
 		user.setUserId(1);
 		user.setEmail("veronica.mereacre26@gmail.com");
 		user.setFullName("Veronica Eu");
-		user.setPassword("secret26");
+		user.setPassword("24674ab1ad41298ef20c23b7bbd4184f");
 		userDAO.update(user);
 		
 		String expected = "secret26";
@@ -112,6 +112,23 @@ public class UserDAOTest extends BaseDAOTest {
 		assertEquals(5, totalUsers);
 	}
 	
+	@Test
+	public void testCheckLoginSuccess() {
+		String email = "veronica.mereacre26@gmail.com";
+		String password = "secret26";
+		boolean loginResult = userDAO.checkLogin(email, password);
+		
+		assertTrue(loginResult);
+	}
+	
+	@Test
+	public void testCheckLoginFail() {
+		String email = "veronica26@gmail.com";
+		String password = "secret6";
+		boolean loginResult = userDAO.checkLogin(email, password);
+		
+		assertFalse(loginResult);
+	}
 	
 	@Test
 	public void testFindByEmail() {

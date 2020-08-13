@@ -4,10 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-
-import com.bookstore.dao.UserDAO;
 
 public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +21,6 @@ public abstract class BaseServlet extends HttpServlet {
 	public void destroy() {
 		entityManager.close();
 		entityManagerFactory.close();
-		
 	}
 	
 	
