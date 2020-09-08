@@ -194,4 +194,23 @@ public class BookDAOTest  extends BaseDAOTest {
 		assertTrue(true);
 		
 	}
+	
+	@Test
+	public void testListByCategory() {
+		int categoryId = 1;
+		List<Book> listBooks = bookDao.listByCategory(categoryId);
+		
+		assertTrue(listBooks.size() > 0);
+		
+	}
+	
+	@Test
+	public void testListNewBooks() {
+		List<Book> listNewBooks = bookDao.listNewBooks();
+		
+		for (Book aBook : listNewBooks) {
+			System.out.println(aBook.getTitle() + " - " + aBook.getPublishDate());
+		}
+		assertEquals(4, listNewBooks.size());
+	}
 }

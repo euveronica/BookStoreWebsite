@@ -1,4 +1,4 @@
-<div align = "center">
+<div align = "center" style="clear:both">
 		<h4>Copyright(c) 2020 by Evergreen Books Co., Ltd</h4>
 		<a href="about"> About Us </a> |
 		<a href="contact"> Contact us </a> |
