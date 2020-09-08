@@ -4,6 +4,7 @@ package com.bookstore.entity;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ import javax.persistence.UniqueConstraint;
 
 public class Book implements java.io.Serializable {
 
-	private int bookId;
+	private Integer bookId;
 	private Category category;
 	private String title;
 	private String author;
@@ -54,7 +55,7 @@ public class Book implements java.io.Serializable {
 	public Book() {
 	}
 
-	public Book(int bookId, Category category, String title, String author, String description, String isbn,
+	public Book(Integer bookId, Category category, String title, String author, String description, String isbn,
 			byte[] image, float price, Date publishDate, Date lastUpdateTime) {
 		this.bookId = bookId;
 		this.category = category;
@@ -68,7 +69,7 @@ public class Book implements java.io.Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
-	public Book(int bookId, Category category, String title, String author, String description, String isbn,
+	public Book(Integer bookId, Category category, String title, String author, String description, String isbn,
 			byte[] image, float price, Date publishDate, Date lastUpdateTime, Set<Review> reviews,
 			Set<OrderDetail> orderDetails) {
 		this.bookId = bookId;
@@ -90,11 +91,11 @@ public class Book implements java.io.Serializable {
 	@Column(name = "book_id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	public int getBookId() {
+	public Integer getBookId() {
 		return this.bookId;
 	}
 
-	public void setBookId(int bookId) {
+	public void setBookId(Integer bookId) {
 		this.bookId = bookId;
 	}
 
@@ -209,4 +210,28 @@ public class Book implements java.io.Serializable {
 	public void setBase64Image(String base64) {
 		this.base64Image = base64;		
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bookId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(bookId, other.bookId);
+	}
+
+	
+
+
+	
+	
+	
 }

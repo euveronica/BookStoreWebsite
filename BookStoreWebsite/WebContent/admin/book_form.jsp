@@ -37,9 +37,9 @@
 	</div>
 	
 	<div align="center">
-		<c:if test="${user != null}">
-			<form action="update_user" method="post" id="userForm">
-			<input type="hidden" name="userId" value="${user.userId}">
+		<c:if test="${book != null}">
+			<form action="update_book" method="post" id="bookForm" enctype="multipart/form-data">
+			<input type="hidden" name="bookId" value="${book.bookId}">
 		</c:if>
 		<c:if test="${book == null}">
 			<form action="create_book" method="post" id="bookForm" enctype="multipart/form-data">
@@ -51,7 +51,12 @@
 			<td>
 				<select name = "category">
 				<c:forEach items = "${listCategory}" var="category">
+					<c:if test = "${category.categoryId eq book.category.categoryId}">
+					<option value = "${category.categoryId}" selected>
+					</c:if>
+					<c:if test = "${category.categoryId ne book.category.categoryId}">
 					<option value = "${category.categoryId}" >
+					</c:if>			
 						${category.name}
 					</option>
 				</c:forEach>
@@ -73,6 +78,17 @@
 		<tr>
 				<td align="right">Publish Date:</td>
 				<td align="left"><input type="text" id="publishDate" name="publishDate" size="20" value="${book.publishDate}" /></td>
+				<!-- 
+				
+				to format Date:
+				1. insert taglib:
+						 taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" 
+				2. modify value of the input type
+				<input type="text" id="publishDate" name="publishDate" size="20" 
+				value="<fmt:formatDate pattern='MM/dd/yyyy' value='${book.publishDate}'/>" />
+				
+				 -->
+				
 				<script>
 				 $(document).ready(function() { 
 				
@@ -91,7 +107,8 @@
 				<td align="right">Book Image:</td>
 				<td align="left">
 					<input type="file" id="bookImage" name="bookImage" size="20" /> <br/>
-					<img id = "thumbnail" alt = "Image Preview" style="width:20%; margin-top:10px" />
+					<img id = "thumbnail" alt = "Image Preview" style="width:20%; margin-top:10px" 
+					src = "data:image/jpg;base64,${book.base64Image}"/>
 				</td>
 		</tr>
 			
@@ -105,7 +122,7 @@
 		<tr>
 				<td align="right">Description:</td>
 				<td align="left">
-					<textarea rows="5" cols="50" name="description" id="description"  value="${book.description}">
+					<textarea rows="5" cols="50" name="description" id="description"> ${book.description}
 					</textarea>
 				</td>
 		</tr>
@@ -141,7 +158,11 @@
 				author: "required",
 				isbn: "required",
 				publishDate: "required",
+				
+				<c:if test = "${book == null}">
 				bookImage: "required",
+				</c:if>
+				
 				price: "required",
 				description: "required",
 			},
