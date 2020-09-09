@@ -54,7 +54,7 @@ public class CategoryDAOTest extends BaseDAOTest {
 
 	@Test
 	public void testDeleteCategory() {
-		Integer catId = 22;
+		Integer catId = 27;
 		categoryDao.delete(catId);
 		Category cat = categoryDao.get(catId);
 		assertNull(cat);
