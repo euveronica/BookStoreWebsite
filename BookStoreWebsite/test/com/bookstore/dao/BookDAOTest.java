@@ -213,4 +213,34 @@ public class BookDAOTest  extends BaseDAOTest {
 		}
 		assertEquals(4, listNewBooks.size());
 	}
+	
+	@Test
+	public void testSearchBookInTitle () {
+		String keyword = "Java";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getTitle() );
+		}
+		assertEquals(7, result.size());
+	}
+	
+	@Test
+	public void testSearchBookInAuthor () {
+		String keyword = "Ferriss";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getAuthor() );
+		}
+		assertEquals(1, result.size());
+	}
+	
+	@Test
+	public void testSearchBookInDescription () {
+		String keyword = "Grails in a hurry";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getDescription() );
+		}
+		assertEquals(1, result.size());
+	}
 }
