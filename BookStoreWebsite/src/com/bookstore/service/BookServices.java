@@ -22,21 +22,19 @@ import com.bookstore.entity.Category;
 
 public class BookServices {
 
-	private EntityManager entityManager;
 	private BookDAO bookDAO;
 	private CategoryDAO categoryDAO; 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public BookServices(EntityManager entityManager,  HttpServletRequest request,
+	public BookServices(HttpServletRequest request,
 			HttpServletResponse response) {
 		super();
-		this.entityManager = entityManager;
 		this.request = request;
 		this.response = response;
 		
-		bookDAO = new BookDAO(entityManager);
-		categoryDAO = new CategoryDAO(entityManager);
+		bookDAO = new BookDAO();
+		categoryDAO = new CategoryDAO();
 	}
 	
 	public void listBooks () throws ServletException, IOException {
@@ -208,10 +206,7 @@ public class BookServices {
 		}
 		
 		List<Book> listBooks = bookDAO.listByCategory(categoryId);
-		List<Category> listCategory = categoryDAO.listAll();
-		
-		request.setAttribute("listCategory", listCategory);
-		
+				
 		request.setAttribute("listBooks", listBooks);		
 		request.setAttribute("category", category);		
 
@@ -235,12 +230,7 @@ public class BookServices {
 			request.setAttribute("message", message);
 			
 		}
-		
-		List<Category> listCategory = categoryDAO.listAll();
-		
-		request.setAttribute("listCategory", listCategory);
-		
-		
+				
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destPage);
 		requestDispatcher.forward(request, response);	
 		

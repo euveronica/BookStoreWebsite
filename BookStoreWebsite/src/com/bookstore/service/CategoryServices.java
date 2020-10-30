@@ -17,19 +17,17 @@ import com.bookstore.entity.Category;
 import com.bookstore.entity.Users;
 
 public class CategoryServices {
-	private EntityManager entityManager;
+	
 	private CategoryDAO categoryDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public CategoryServices(EntityManager entityManager, 
-			HttpServletRequest request, HttpServletResponse response) {
+	public CategoryServices(HttpServletRequest request, HttpServletResponse response) {
 		super();
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
-		
-		categoryDAO = new CategoryDAO(entityManager);
+				
+		categoryDAO = new CategoryDAO();
 		
 	}
 	

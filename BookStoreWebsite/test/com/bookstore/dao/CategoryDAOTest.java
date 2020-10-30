@@ -15,14 +15,13 @@ import org.junit.Test;
 import com.bookstore.entity.Category;
 import com.bookstore.entity.Users;
 
-public class CategoryDAOTest extends BaseDAOTest {
+public class CategoryDAOTest  {
 	
 	private static CategoryDAO categoryDao;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		categoryDao = new CategoryDAO(entityManager);
+		categoryDao = new CategoryDAO();
 	}
 
 	@Test
@@ -54,7 +53,7 @@ public class CategoryDAOTest extends BaseDAOTest {
 
 	@Test
 	public void testDeleteCategory() {
-		Integer catId = 27;
+		Integer catId = 42;
 		categoryDao.delete(catId);
 		Category cat = categoryDao.get(catId);
 		assertNull(cat);
@@ -73,7 +72,7 @@ public class CategoryDAOTest extends BaseDAOTest {
 	@Test
 	public void testCount() {
 		long totalCategories = categoryDao.count();
-		assertEquals(6, totalCategories);
+		assertTrue( totalCategories>0);
 	}
 	
 	@Test
@@ -92,7 +91,7 @@ public class CategoryDAOTest extends BaseDAOTest {
 	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		categoryDao.close();
 	}
 
 }

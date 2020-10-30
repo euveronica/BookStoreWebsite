@@ -11,11 +11,7 @@ import com.bookstore.entity.Users;
 public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 
 	public UserDAO() {
-	}
-	
-	public UserDAO(EntityManager entityManager) {
-		super(entityManager);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Users create(Users user) {

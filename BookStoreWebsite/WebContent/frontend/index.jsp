@@ -11,9 +11,9 @@
 
 <jsp:directive.include file="header.jsp" />
 
-	<div align = "center">
+	<div align="center">
 		<br/><br/>
-		<div align = "center" style="width: 80%; margin: 0 auto">
+		<div align = "center" >
 		<h4>New Books</h4>
 		
 		<c:forEach items="${listNewBooks}" var="book">
@@ -41,6 +41,7 @@
 			<h4>Most-favorite Books</h4>
 		</div>
 		<br/><br/><br/><br/>
+	</div>
 	</div>
 	
 		

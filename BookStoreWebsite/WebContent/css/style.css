@@ -77,9 +77,24 @@ input {
 	font-style: italic;
 	color: blue;
 }
-
 .error {
 	color: red;
 	font-style: italic;
 	margin: 5px;
+}
+
+div.center {
+	text-align: center;
+}
+
+div.book {
+	display: inline-block;
+	margin: 20px;
+	text-align: center;
+	
+}
+
+div.book_group{
+	width: 80%; 
+	margin: 0 auto
 }
